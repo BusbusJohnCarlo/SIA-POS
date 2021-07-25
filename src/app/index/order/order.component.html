@@ -18,8 +18,8 @@
                 <img src="../assets/logo.png" class="inventory-logo">
 
                 <button mat-button class="sidebarcontent" routerLink="/order"><mat-icon class="dashboard">dashboard</mat-icon> Orders</button>
-                <button mat-button class="sidebarcontent" routerLink="/pos" ><mat-icon class="stocks">inventory_2</mat-icon> Point Of Sale</button>
-                <button mat-button class="sidebarcontent" >	<mat-icon class="itemHistory">print</mat-icon>Generate Report</button>
+                <button mat-button style="margin-left: 34px;" class="sidebarcontent" routerLink="/pos" ><mat-icon class="stocks">inventory_2</mat-icon> Point Of Sale</button>
+               <!--  <button mat-button class="sidebarcontent" >	<mat-icon class="itemHistory">print</mat-icon>Generate Report</button> -->
             </mat-sidenav>
             <mat-sidenav-content>
                 <div>
@@ -40,8 +40,9 @@
                     </button>
                     </mat-toolbar>
                 </div>
+                
                    <div class="btns">
-                        <button class="add-button"  mat-flat-button><mat-icon class="aligned-with-icon">add_circle_outline</mat-icon> Add Stocks</button>
+                        <button class="add-button"  onclick="window.print();" mat-flat-button><mat-icon class="aligned-with-icon">add_circle_outline</mat-icon> Print Orders</button>
                         <button class="view-archives"   matBadgeColor="warn"   mat-flat-button><mat-icon class="aligned-with-icon">folder_open</mat-icon><span class="aligned-with-icon"> Archives </span></button>
                         
                       </div>    

@@ -106,92 +106,33 @@ export class POSComponent implements OnInit {
 
   }
   //addPreorder
-  orderInfo: any = {};
-  addPreOrder = (product: any) => {
-
-    this.orderInfo.product_name = product.product_name;
-    this.orderInfo.quantity = product.product_quantity * this.inputText;
-    this.orderInfo.price = product.product_price * this.inputText;
+  orderInfo:any={};
+  addPreOrder = (product:any) =>{
+    if (this.inputText == 0){
+      ("insert quantity");
+    }  
+    else {  
     
+      this.orderInfo.product_name = product.product_name ;
+      this.orderInfo.quantity = product.product_quantity * this.inputText;
+      this.orderInfo.price = product.product_price * this.inputText;
+        {
       this.q = this.inputText;
-
-  this.ds.sendApiRequest("pre", null).subscribe((data: any) => {
-    this.preOrder = data.payload;
-    console.log(this.preOrder.length);
-
-if(this.preOrder.length == 0){
-  this.ds.sendApiRequest("addPreOrder", JSON.parse(JSON.stringify(this.orderInfo))).subscribe((data: any) => {
-    if (data.remarks == "success") {
-      console.log(true)
-      this.pullPreOrder();
-    }
-  }); //api
-}
-if(this.preOrder.length > 0){
-
-  for(let j = 0; j < this.preOrder.length; j++){
-    console.log(product.product_name);
-    console.log(this.preOrder[j].product_name);
-    if(product.product_name == this.preOrder[j].product_name){
-      console.log("UPDATE");
-      console.log(this.preOrder[j])
-      this.orderInfo.quantity = this.preOrder[j].quantity + 1 ;
-      this.orderInfo.price = this.preOrder[j].price + product.product_price;
-          this.ds.sendApiRequest("updatePreOrder", JSON.parse(JSON.stringify(this.orderInfo))).subscribe((data: any) => {
-            if (data.remarks == "success") {
-              console.log(true)
-
-              this.pullPreOrder();
-            }
-            this.orderInfo.product_name = "";
-            this.orderInfo.quantity = 0;
-            this.orderInfo.price = 0;
-          });
-
-    }else if(product.product_name != this.preOrder[j].product_name){
-      console.log(false)
-      console.log(product.product_name);
-      console.log(this.preOrder[j].product_name);
-      console.log("ADD");
       this.ds.sendApiRequest("addPreOrder", JSON.parse(JSON.stringify(this.orderInfo))).subscribe((data: any) => {
-        if (data.remarks == "success") {
+     if(data.remarks == "success"){
           console.log(true)
           this.pullPreOrder();
+
         }
-        this.orderInfo.product_name = "";
-        this.orderInfo.quantity = 0;
-        this.orderInfo.price = 0;
-      });//api
-    }else{
+  }); 
+ 
+  
+  this.getSubTotal();
 
-        this.orderInfo.product_name = "";
-        this.orderInfo.quantity = 0;
-        this.orderInfo.price = 0;
-
-       
-    }//else
-
-  }//end loop
-}
-
-
-
-  });//API
-
-
-
-
-
-
-
-
-
-      this.getSubTotal();
-
-      console.log(this.orderInfo);
-    
-
+  console.log(this.orderInfo);
+    }
   }
+}
 
   //pull function order
   order: any;

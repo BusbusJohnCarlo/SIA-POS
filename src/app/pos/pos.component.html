@@ -13,8 +13,8 @@
             <img src="../assets/logo.png" class="inventory-logo">
 
             <button mat-button class="sidebarcontent" routerLink="/order" ><mat-icon class="dashboard">dashboard</mat-icon> Orders</button>
-            <button mat-button class="sidebarcontent" routerLink="" ><mat-icon class="stocks">inventory_2</mat-icon> Point Of Sale</button>
-            <button mat-button class="sidebarcontent" >	<mat-icon class="itemHistory">print</mat-icon>Generate Report</button>
+            <button mat-button style="margin-left: 33px;" class="sidebarcontent" routerLink="" ><mat-icon class="stocks">inventory_2</mat-icon> Point Of Sale</button>
+           <!--  <button mat-button style="margin-left: 7px;" class="sidebarcontent" >	<mat-icon class="itemHistory">print</mat-icon>Generate Report</button> -->
         </mat-sidenav>
         <mat-sidenav-content>
             <div>
@@ -91,31 +91,31 @@
     </div>
       <div class="sticky" >
         <mat-list>
-          <mat-list-item>
+          <!-- <mat-list-item>
             <button>Add Discount</button>
             <button (click)="countUp">Add Quantity</button>
             <button (click)="countDown">decrease Discount</button>
-          </mat-list-item>
-          <mat-list-item> SubTotal  <span name="total" ngDefaultControl class="summary1"> {{subtotal - subtotal * 0.12 | currency : 'PHP': 'symbol-narrow' : ''}}</span></mat-list-item>
-          <mat-list-item > Tax <span name="Tax" ngDefaultControl class="summary"> {{subtotal * 0.12 | currency : 'PHP': 'symbol-narrow' : ''}}</span> </mat-list-item>
-          <mat-list-item > Total <span name="subtotal" ngDefaultControl class="summary"> {{subtotal | currency : 'PHP': 'symbol-narrow' : ''}}</span> </mat-list-item>
+          </mat-list-item> -->
+          <mat-list-item> <strong>SubTotal</strong>   <span name="total" ngDefaultControl class="summary1"> {{subtotal - subtotal * 0.12 | currency : 'PHP': 'symbol-narrow' : ''}}</span></mat-list-item>
+          <mat-list-item > <strong>Tax</strong> <span name="Tax" ngDefaultControl class="summary"> {{subtotal * 0.12 | currency : 'PHP': 'symbol-narrow' : ''}}</span> </mat-list-item>
+          <mat-list-item > <strong>Total</strong> <span name="subtotal" ngDefaultControl class="summary"> {{subtotal | currency : 'PHP': 'symbol-narrow' : ''}}</span> </mat-list-item>
          </mat-list>
-        <mat-grid-list cols="4" rowHeight="5:4">
+        <mat-grid-list cols="2" rowHeight="2:1">
 
-         <mat-grid-tile>
+         <!-- <mat-grid-tile>
           <button class="gridBttn" style="height: 100%; width: 100%; ">Warn</button>
-        <!--    Qty: <span name="inputText" ngDefaultControl id="inputText">{{inputText}}</span> -->
-         </mat-grid-tile>
+            Qty: <span name="inputText" ngDefaultControl id="inputText">{{inputText}}</span>
+         </mat-grid-tile> -->
  
-          <mat-grid-tile>
+         <!--  <mat-grid-tile>
             <button class="gridBttn"  style="height: 100%; width: 100%; ">Primary</button>
-          </mat-grid-tile>
+          </mat-grid-tile> -->
           <mat-grid-tile>
             
-            <button class="gridBttn"  (click)="btnSubmit()" style="height: 100%; width: 100%; ">Submit</button>
+            <button class="gridBttn"  (click)="btnSubmit()" style="height: 100%; width: 100%; "><img src="../assets/submit.png"  style="width: 70px; height: 70px;"></button>
           </mat-grid-tile>
           <mat-grid-tile>
-            <button class="gridBttn" (click)="clearOrder()" style="height: 100%; width: 100%;"><img src="../assets/clear1.png"  style="width: 70px; height: 70px;"><br><span >Clear</span></button>
+            <button class="gridBttn" (click)="clearOrder()" style="height: 100%; width: 100%;"><img src="../assets/clear1.png"  style="width: 70px; height: 70px;"><br><span ></span></button>
           </mat-grid-tile>
         
         </mat-grid-list>
@@ -147,7 +147,7 @@
               <span style="margin-left: 40px;">For Starters</span>
           </ng-template>
             <div class="menu-container" style="display: inline-flex; margin-bottom: 10px;"*ngFor="let product of product" >
-                <mat-card style="width: 100px; height: 50px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #FF5722; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'For Starters'">
+                <mat-card style="width: 100px; height: 100px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #FF5722; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'For Starters'">
                   <p> {{product.product_name}}</p>
               
                   </mat-card>
@@ -160,7 +160,7 @@
               <span style="margin-left: 40px;" >From The Grill</span>
           </ng-template>
             <div class="menu-container" style="display: inline-flex; margin-bottom: 10px;"*ngFor="let product of product" >
-                <mat-card style="width: 100px; height: 50px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #00BCD4 ; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'From The Grill'">
+                <mat-card style="width: 100px; height: 100px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #00BCD4 ; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'From The Grill'">
                   <p> {{product.product_name}}</p>
                     
                   </mat-card> 
@@ -173,7 +173,7 @@
               <span style="margin-left: 40px;" >For Starters</span>
           </ng-template>
             <div class="menu-container" style="display: inline-flex; margin-bottom: 10px;"*ngFor="let product of product" >
-                <mat-card style="width: 100px; height: 50px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #b3a783 ; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'Oodles Of Noodles'">
+                <mat-card style="width: 100px; height: 100px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #b3a783 ; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'Oodles Of Noodles'">
                   <p> {{product.product_name}}</p>
                     
                   </mat-card> 
@@ -186,7 +186,7 @@
               <span style="margin-left: 40px;" >Soup For The Soul</span>
           </ng-template>
             <div class="menu-container" style="display: inline-flex; margin-bottom: 10px;"*ngFor="let product of product" >
-                <mat-card style="width: 100px; height: 50px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #E91E63; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'Soup For The Soul'">
+                <mat-card style="width: 100px; height: 100px; text-align: center; margin-top: 10px; margin-left:20px; background-color: #E91E63; color: white;" (click)="addPreOrder(product)" *ngIf="product.product_type == 'Soup For The Soul'">
                   <p> {{product.product_name}}</p>
                   
                   </mat-card> 
