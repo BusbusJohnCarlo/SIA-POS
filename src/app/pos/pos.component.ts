@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import { NgxPrintModule } from 'ngx-print';
 import { Router } from '@angular/router';
+
 
 
 import Swal from 'sweetalert2'
@@ -11,11 +12,12 @@ import Swal from 'sweetalert2'
   templateUrl: './pos.component.html',
   styleUrls: ['./pos.component.css']
 })
+
 export class POSComponent implements OnInit {
 
   panelOpenState = false;
   Order: boolean = true;
-  Invoice: boolean = false;
+  Invoice: boolean = false; 
   edit: boolean = false;
   view: boolean = false;
 
@@ -29,7 +31,9 @@ export class POSComponent implements OnInit {
     private ds: DataService,
     private ngx: NgxPrintModule,
     private route: Router
-  ) { }
+  ) { 
+
+  }
   
   btnSubmit(){
     this.route.navigateByUrl('/payment');
@@ -88,7 +92,19 @@ export class POSComponent implements OnInit {
     this.edit = false;
   }
 
-  //adding function to database
+  //adding function to database\
+
+  /* public beforeChange($event: NgbPanelChangeEvent) {
+
+    if ($event.panelId === 'preventchange-2') {
+      $event.preventDefault();
+    }
+
+    if ($event.panelId === 'preventchange-3' && $event.nextState === false) {
+      $event.preventDefault();
+    }
+  } */
+  
   products: any = {};
   cardInfo: any = {};
   inputText: number = 1;;
@@ -125,8 +141,8 @@ export class POSComponent implements OnInit {
 
         }
   }); 
- 
-  
+
+  this.inputText = 0;
   this.getSubTotal();
 
   console.log(this.orderInfo);
@@ -204,15 +220,5 @@ export class POSComponent implements OnInit {
   }
 
 
-  countUp() {
-    this.inputText++;
-  }
-  countDown() {
-    if (this.inputText == 1) {
-      alert("invalid quantity")
-    }
-    else
-      this.inputText--;
-  }
 
 }

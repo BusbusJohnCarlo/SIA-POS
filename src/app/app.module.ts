@@ -61,6 +61,7 @@ import { POSComponent } from './pos/pos.component';
 
 import { OrderComponent } from './index/order/order.component';
 import { PaymentComponent } from './payment/payment.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -122,7 +123,8 @@ import { PaymentComponent } from './payment/payment.component';
     MatTableModule,
     FormsModule,
     // HTTP
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
