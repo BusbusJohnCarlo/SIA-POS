@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import { NgxPrintModule } from 'ngx-print';
+import { Router } from '@angular/router';
+
 
 import Swal from 'sweetalert2'
 @Component({
@@ -25,8 +27,13 @@ export class POSComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private ds: DataService,
-    private ngx: NgxPrintModule
+    private ngx: NgxPrintModule,
+    private route: Router
   ) { }
+  
+  btnSubmit(){
+    this.route.navigateByUrl('/payment');
+  }
 
   openOrder() {
     this.Order = true;
