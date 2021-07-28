@@ -68,17 +68,16 @@
   
                 <mat-grid-tile>
                   Qty: {{pre.quantity}}
+                  
                 </mat-grid-tile>
   
                 <mat-grid-tile>
                   Price: {{pre.price | currency : 'PHP': 'symbol-narrow'}}
                 </mat-grid-tile>
                 <mat-grid-tile>
-                  Discount:
+                  <mat-icon style="color: red; cursor: pointer;" (click)="delPre(pre.order_ID);">delete</mat-icon>&nbsp;
                 </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" >
-                  4</mat-grid-tile>
-                <mat-grid-tile> <mat-icon style="color: red; cursor: pointer;" (click)="delPre(pre.order_ID);">delete</mat-icon>&nbsp;</mat-grid-tile>
+                
               </mat-grid-list>
             </mat-expansion-panel>
            
@@ -218,7 +217,8 @@
               <p>Enter Quantity:</p> 
                    <input matInput type="number" [(ngModel)]="inputText" style="color: black; font-size: inherit;" >
                 
-                   <button   (click)="addPreOrder(product)" >Confirm</button>
+                   <button  closeAll (click)="addPreOrder(product)" >Confirm</button>
+                   
             </mat-expansion-panel>
         
           </mat-accordion>

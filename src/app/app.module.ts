@@ -60,8 +60,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { POSComponent } from './pos/pos.component';
 
 import { OrderComponent } from './index/order/order.component';
-import { PaymentComponent } from './payment/payment.component';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReceiptComponent } from './receipt/receipt.component';
 
 
 
@@ -73,10 +74,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     OrderComponent,
     TestingComponent,
-
-
     POSComponent,
-    PaymentComponent   
+    ReceiptComponent   
   ],
   imports: [
     BrowserModule,

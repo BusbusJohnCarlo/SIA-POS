@@ -36,7 +36,7 @@ export class POSComponent implements OnInit {
   }
   
   btnSubmit(){
-    this.route.navigateByUrl('/payment');
+    this.route.navigateByUrl('/receipt');
   }
 
   openOrder() {

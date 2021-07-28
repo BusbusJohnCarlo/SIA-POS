@@ -1,3 +1,4 @@
+
 <!--PRODUCTS TABLE-->
 
 <head>
@@ -41,67 +42,53 @@
                     </mat-toolbar>
                 </div>
                 
-                   <div class="btns">
-                        <!-- <button class="add-button"  onclick="window.print();" mat-flat-button><mat-icon class="aligned-with-icon">add_circle_outline</mat-icon> Print Orders</button> -->
+                  <!--  <div class="btns">
+                        \<button class="add-button"  onclick="window.print();" mat-flat-button><mat-icon class="aligned-with-icon">add_circle_outline</mat-icon> Print Orders</button> 
                         <button class="view-archives"   matBadgeColor="warn"   mat-flat-button><mat-icon class="aligned-with-icon">folder_open</mat-icon><span class="aligned-with-icon"> Archives </span></button>
                         
-                      </div>    
-                <mat-form-field class="search"autocomplete="off">
+                      </div>     -->
+               <!--  <mat-form-field class="search"autocomplete="off">
                   
                     <mat-label search><mat-icon class="aligned-with-icon1"  style="font-size: 25px;">search</mat-icon><span class="iLabel">Search</span></mat-label>
                     <input  autocomplete="off" matInput class="searchField"  >
-                </mat-form-field>
+                </mat-form-field> -->
 
                 <div class="card-main" >  
                   
-    <div class="mat-elevation-z8 tableSize" >
-      
-        <div class="print-container">
-            <table class="head">
-              <thead>
-                <tr class="thead" >
-  
-                  <th id="th">OrderNo.</th>
-                  <th id="th">Product</th>
-                  <th id="th">Quantity</th>
-                  <th id="th">Price</th>
-                  <th id="th">Actions</th>
-  
-                </tr>
-              </thead>
-  
-  
-              <tbody>
-                <tr *ngFor="let order of order">
-  
-                  <td class="td" >
-                    {{ order.prodID }}
-                  </td>
-                  <td class="td">
-                    {{order.product_name}}
-                  </td>
-                  <td class="td"> 
-                    {{order.quantity}}
-                  </td>
-                  <td class="td"> 
-                    {{order.price}}
-                  </td>
-                  <td >
-                      <div class="actBtn">
-                   <!--  <button mat-raised-button class="edit-button" color="success" ><mat-icon class="editIcon">edit</mat-icon>Edit</button>  -->
-                    <button mat-raised-button class="archive-button"   (click)="delOrder(order.prodID);"><mat-icon class="archiveIcon">archive</mat-icon>Archive</button>
+    
+
+            <div class="receipt-screen">
+            
+                <div  class="pos-receipt-container">
+
+                    <div  id="print-section" class="receipt-content">
+                        <img src="../assets/logo.png" class="inventory-logo">
+                        <!-- <div class="companyInfo">
+
+                           
+
+                        </div>
+
+                        <div class="orderlines">
+                    
+                        </div> -->
+                    </div>
+                    <div class="func-container">
+                    <button  printTitle="MyTitle"  printSectionId="print-section"  ngxPrint>print</button>
+                    </div>
                 </div>
-                  </td>
-  
-                </tr>
-              </tbody>
-            </table>
-          </div>
-  
+                
+            </div>
+
+            
+
+
+
+
       <div class="div-print-item">
         <!-- <button onclick="window.print();"><i class="fas fa-print"></i>&nbsp; Print</button> -->
       </div>
-    </div>
+    
     <!-- <div>
       <div class="search-input">
         <label for="search"><i class="fas fa-search"></i>&nbsp; <input id="search" name="search" placeholder="search"></label>
