@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
@@ -53,7 +54,12 @@
                     <input  autocomplete="off" matInput class="searchField"  >
                 </mat-form-field> -->
 
-                <div class="card-main" >  
+                <!-- <div class="card-main" >  
+
+
+                      
+
+      
                   
     
 
@@ -62,7 +68,7 @@
                 <div  class="pos-receipt-container">
 
                     <div  id="print-section" class="receipt-content">
-                        <img src="../assets/logo.png" class="inventory-logo">
+                        <img src="../assets/logo.png" class="inventory-logo"> -->
                         <!-- <div class="companyInfo">
 
                            
@@ -72,22 +78,109 @@
                         <div class="orderlines">
                     
                         </div> -->
-                    </div>
-                    <div class="func-container">
+                    <!-- </div> -->
+                    <!-- <div class="func-container">
                     <button  printTitle="MyTitle"  printSectionId="print-section"  ngxPrint>print</button>
-                    </div>
-                </div>
+                    </div> -->
+                <!-- </div>
                 
-            </div>
+            </div> -->
+
+            <div class="row no-gutters">
+<!-- 
+              <div class="col-24 text">
+
+
+              </div> -->
+
+                  <div class="col-5 no-gutters">
+
+                    
+
+                    <div class="leftside d-flex justify-content-center align-items-center">
+
+                      <mat-card class="invoice">
+                        <img src="../assets/logo.png" class="inventory-logo">
+
+                        <mat-list class="mat">
+                          <mat-list-item > <strong class="total">Order Name</strong> </mat-list-item>
+                          <mat-list-item > <strong class="total">OrderQuantity</strong> <span class="inv">0.0</span></mat-list-item>
+                          <hr class="hr">
+                          <mat-list-item > <strong class="total">SubTotal</strong> <span class="inv">0.0</span></mat-list-item>
+                          <mat-list-item > <strong class="total">Tax15.00%</strong> <span class="inv">0.0</span></mat-list-item>
+                          <hr class="hr">
+                          <mat-list-item > <strong class="total1">TOTAL</strong> <span class="inv1">0.0</span></mat-list-item>
+                          <hr class="hr">
+                          <mat-list-item > <strong class="total">Cash</strong> <span class="inv">0.0</span></mat-list-item>
+                          <hr class="hr">
+                          <mat-list-item > <strong class="total1">Change</strong> <span class="inv1">0.0</span></mat-list-item>
+                        </mat-list>
+
+                        <div class="info">
+                          <span class="inv2">Order #</span>
+                          <br>
+                          <span class="inv2">Date and Time</span>
+                        </div>
+                        
+                        
+                        
+                      </mat-card>
+
+                      
+
+
+
+                    </div>
+
+                    
+
+
+          
+                  </div>
+          
+                  <div class="col-7 no-gutters">
+          
+                    <div class="rightside">
+
+                      <p>How would you like to recieve your receipt?</p>
+
+
+                      <div>
+                        <button type="button" class="col-8 buttonprint">
+                          <span class="button__icon">
+                            <mat-icon class="dashboard1">dashboard</mat-icon>
+                          </span>
+                          <span class="button__text">Print Receipt</span>
+                          
+                        </button>
+                    </div>
+                    <br>
+                    <br>
+                      <!-- <button  printTitle="MyTitle"  printSectionId="print-section"  ngxPrint>Print Receipt</button> -->
+
+
+                      <div class="emaildiv">
+                        <input class="emailprint" type="text" placeholder="Email">
+                        <button type="button" class="enter">SEND  </button>
+
+
+                      </div>
+                    </div>
+          
+                  </div>
+          
+    
+    
+        </div>
 
             
 
 
 
 
-      <div class="div-print-item">
-        <!-- <button onclick="window.print();"><i class="fas fa-print"></i>&nbsp; Print</button> -->
-      </div>
+      <!--  <div class="div-print-item">
+        <button onclick="window.print();"><i class="fas fa-print"></i>&nbsp; Print</button>
+      </div> -->
     
     <!-- <div>
       <div class="search-input">
@@ -97,7 +190,7 @@
         <button><i class="fas fa-print"></i>&nbsp; Print</button>
       </div>
     </div> -->
-  </div>
+  <!-- </div> -->
   
             </mat-sidenav-content>
         </mat-sidenav-container>
@@ -107,6 +200,10 @@
 <!--invoice table -->
 
   <!--order table -->
+
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 

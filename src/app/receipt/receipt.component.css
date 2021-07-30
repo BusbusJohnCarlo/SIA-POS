@@ -1,3 +1,158 @@
+
+/* Print */
+
+.invoice {
+  margin-top: 10%;
+  height: 85vh;
+  width: 50vh;
+}
+
+
+.inv {
+  width: 100%;
+  text-align: right;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 12px;
+
+}
+
+.inv1 {
+  width: 100%;
+  text-align: right;
+  font-size: 13px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.total {
+  font-size: 12px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+}
+
+.total1 {
+  font-size: 13px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.hr {
+ width: 30%;
+ margin-left: 65%;
+ margin-top: 2px;
+}
+
+.info {
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 13px;
+  margin-top: 5%;
+}
+
+
+ @media screen and (min-width:768px)
+ {
+   
+    .leftside, .rightside {
+      
+     height: 80vh;
+    }
+
+ }
+
+ .leftside {
+  height: 80vh;
+
+ }
+
+ .rightside {
+  height: 80vh;
+
+ }
+
+
+ .buttonprint {
+
+
+    margin-top: 30vh;
+    margin-left: 18vh;
+   display: inline-flex;
+   height: 60px;
+   width: 75%;
+   padding-left: 25%;
+   background-color: rgb(151, 150, 150);
+   border: none;
+   outline: none;
+   border-radius: 5px;
+   font-family: 'Times New Roman', Times, serif;
+   font-size: 15px;
+   font-weight: 100;
+   color: cornsilk;
+   cursor: pointer;
+ }
+
+ .buttonprint:hover {
+  background-color: rgb(110, 106, 106);
+ }
+
+ .buttonprint:active {
+  background-color: rgb(110, 106, 106);
+ }
+
+ .button__text, .button__icon {
+  text-align: center;
+   display: inline-flex;
+   align-items: center;
+   padding: 5px;
+   height: 100%;
+ }
+
+p {
+  text-align: center;
+  font-size: 30px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bolder;
+}
+
+ /* Email */
+
+ .emaildiv {
+  margin-left: 18vh;
+ }
+
+ .emailprint {
+   width: 65%;
+   border: 2px solid #aaa;
+   border-radius: 4px;
+   font-size: 18px;
+   margin: 8px 0;
+   outline: none;
+   padding: 8px;
+   box-sizing: border-box;
+   transition: .1s;
+ }
+
+ .emailprint:focus {
+   border-color: dodgerblue;
+   box-shadow: 0 0 8px 0 dodgerblue;
+ }
+
+.emaildiv {
+  position: relative;
+}
+
+
+.enter {
+  margin-left: 3%;
+  height: 35px;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+   font-size: 18px;
+}
+
+
+
 /* TO ALIGN MAT-ICON TO THE TEXT */
 .aligned-with-icon {
     margin-top: -4px;
@@ -142,11 +297,11 @@
   .inventory-logo {
     display: block;
     margin-top: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
-    width: 155px;
-    height: 60px;
+    width: 145px;
+    height: 50px;
   }
   
   .sidenavbar {
@@ -453,3 +608,4 @@
 
    
  }
+
