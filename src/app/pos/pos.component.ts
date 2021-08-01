@@ -36,7 +36,29 @@ export class POSComponent implements OnInit {
   }
   
   btnSubmit(){
-    this.route.navigateByUrl('/receipt');
+    if (this.cashInput < this.subtotal ){
+      
+      Swal.fire({  
+        icon: 'error',  
+        title: 'Oops...',  
+        text: 'Please Enter A Valid Amount of Cash',  
+        
+      })  
+    }  
+    else if(this.preOrder.length == 0){  
+      Swal.fire({  
+        icon: 'error',  
+        title: 'Oops...',  
+        text: 'Please Enter A Product',  
+        
+      })  
+    }
+    else{
+
+      this.cashEntered = this.cashInput;
+      this.route.navigateByUrl('/receipt');
+  
+    }
   }
 
   openOrder() {
@@ -107,30 +129,39 @@ export class POSComponent implements OnInit {
   
   products: any = {};
   cardInfo: any = {};
-  inputText: number = 1;;
+  inputText: number = 1;
+  cashInput: number = 0;
+  cashEntered: number = 0;
   q: any;
   /*  @Input() title:string; */
   addOrder = (products: any) => {
-    this.cardInfo.product_name = products.title;
-    this.cardInfo.quantity = products.subtitle * this.inputText;
-    this.cardInfo.price = products.price * this.inputText;
+    this.orderInfo.product_name = products.name;
+    this.orderInfo.quantity = products.subtitle * this.inputText;
+    this.orderInfo.price = products.price * this.inputText;
     this.q = this.inputText;
-    this.ds.sendApiRequest("addOrder", JSON.parse(JSON.stringify(this.cardInfo))).subscribe((data: any) => {
+    this.ds.sendApiRequest("addOrder", JSON.parse(JSON.stringify(this.orderInfo))).subscribe((data: any) => {
       this.pullOrder();
     });
-    console.log(this.cardInfo);
+    console.log(this.orderInfo);
 
   }
   //addPreorder
   orderInfo:any={};
   addPreOrder = (product:any) =>{
     if (this.inputText == 0){
-      ("insert quantity");
+     
+      Swal.fire({  
+        icon: 'error',  
+        title: 'Oops...',  
+        text: 'Please Enter A Valid Amount of Quantity',  
+        
+      })  
+    
     }  
     else {  
     
       this.orderInfo.product_name = product.product_name ;
-      this.orderInfo.quantity = product.product_quantity * this.inputText;
+      this.orderInfo.quantity = product.available * this.inputText;
       this.orderInfo.price = product.product_price * this.inputText;
         {
       this.q = this.inputText;
@@ -199,8 +230,11 @@ export class POSComponent implements OnInit {
     })
   }
   clearOrder() {
-
-    console.log(this.orderInfo);
+    
+    for (var i = 0; this.preOrder.length > i; i++) {
+    
+    }
+    console.log(this.preOrder);
     this.ds.sendApiRequest("clearOrder", this.orderInfo).subscribe((res: any) => {
 
       this.pullPreOrder();

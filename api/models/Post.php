@@ -20,7 +20,7 @@ public function addPreOrder($data) {
     $message = "Unable to retrieve data";
     $orderInfo = $data->orderInfo;
 
-    $res = $this->gm->insert('tbl_order', $orderInfo);
+    $res = $this->gm->insert('pos_order_tb', $orderInfo);
 
     if($res['code']==200) {
         $code = 200;
@@ -41,7 +41,7 @@ public function updatePreOrder($data) {
     $message = "Unable to retrieve data";
     $orderInfo = $data->orderInfo;
 
-    $res = $this->gm->edit('tbl_order', $orderInfo);
+    $res = $this->gm->edit('pos_order_tb', $orderInfo);
 
     if($res['code']==200) {
         $code = 200;
@@ -62,7 +62,7 @@ public function updatePreOrder($data) {
         $message = "Unable to retrieve data";
         $cardInfo = $data->cardInfo;
 
-        $res = $this->gm->insert('tbl_preorder', $cardInfo);
+        $res = $this->gm->insert('pos_preorder_tb', $cardInfo);
 
         if($res['code']==200) {
             $code = 200;
@@ -82,7 +82,7 @@ public function updatePreOrder($data) {
         $message = "Unable to retrieve data";
         $productInfo = $data->productInfo;
 
-        $res = $this->gm->insert('tbl_products', $productInfo);
+        $res = $this->gm->insert('menu_tb', $productInfo);
 
         if($res['code']==200) {
             $code = 200;
@@ -99,7 +99,7 @@ public function updatePreOrder($data) {
     public function delOrder($d) { 
         $data = $d; 
         $prodID = $data->prodID;
-         $res = $this->gm->delete('tbl_preorder', $data, "prodID = '$prodID'"); if ($res['code'] == 200) 
+         $res = $this->gm->delete('pos_preorder_tb', $data, "prodID = '$prodID'"); if ($res['code'] == 200) 
          {  
             $payload = $res['data'];            
             $remarks = "success";            
@@ -116,7 +116,7 @@ public function updatePreOrder($data) {
         public function delPre($d) { 
             $data = $d; 
             $order_ID = $data->order_ID;
-             $res = $this->gm->delete('tbl_order', $data, "order_ID = '$order_ID'"); if ($res['code'] == 200) 
+             $res = $this->gm->delete('pos_order_tb', $data, "order_ID = '$order_ID'"); if ($res['code'] == 200) 
              {  
                 $payload = $res['data'];            
                 $remarks = "success";            

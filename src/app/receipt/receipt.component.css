@@ -3,8 +3,11 @@
 
 .invoice {
   margin-top: 10%;
-  height: 85vh;
+  height: 65vh;
   width: 50vh;
+  position: relative;
+  margin: auto;
+  justify-content: center;
 }
 
 
@@ -12,35 +15,38 @@
   width: 100%;
   text-align: right;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 12px;
-
-}
-
-.inv1 {
-  width: 100%;
-  text-align: right;
-  font-size: 13px;
-  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
   font-weight: bold;
 }
 
+.inv1 {
+
+  width: 100%;
+  text-align: right;
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: lighter;
+  
+}
+
 .total {
-  font-size: 12px;
+  text-align: left;
+  width: 100%;
+  font-size: 20px;
   font-family: 'Times New Roman', Times, serif;
   font-weight: lighter;
 }
 
 .total1 {
-  font-size: 13px;
+
+  font-size: 20px;
   text-align: center;
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
 }
 
-.hr {
- width: 30%;
- margin-left: 65%;
- margin-top: 2px;
+hr {
+  border-top: 1px dashed black;
 }
 
 .info {
@@ -61,6 +67,13 @@
 
  }
 
+ .footer {
+  width: 100%;
+ /*  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  right: 5px; */
+}
  .leftside {
   height: 80vh;
 
@@ -300,8 +313,8 @@ p {
     margin-bottom: 5px;
     margin-left: auto;
     margin-right: auto;
-    width: 145px;
-    height: 50px;
+    width: 290px;
+    height: 100px;
   }
   
   .sidenavbar {
@@ -334,10 +347,8 @@ p {
   /* TABLE STYLE */
   
   table {
-    margin-right: 80px;
-    margin-top: 30px;
     width: 100%;
-    background-color: #fbfbfb;
+    
   }
   
   .tableSize {
@@ -386,19 +397,17 @@ p {
   }
   
   .td {
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
-    color: #282828;
-    text-align: center;
-    padding: 2%;
+    font-size: 13px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
   }
   
   .th {
-    font-family: "Poppins", sans-serif;
-    font-size: 14px;
-    color: #282828;
+    font-size: 18px;
     text-align: center;
-    width: 170px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
   }
   
   .actBtn {
@@ -591,10 +600,9 @@ p {
     
    
  }
-.receipt-content, .func-container{
-    text-align: center  ;
-    flex: 1;
-    border: 0.5px dotted rgb(185, 182, 182);
+.receipt-content{
+  margin-top: 50px;
+
 }
 
  .pos-receipt-container{
@@ -604,8 +612,28 @@ p {
      height: 800px;
  }
 
- .companyInfo{
 
-   
- }
 
+.lineH{
+
+  margin-bottom: -25px;
+}
+.cocolimeInfo{
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+  font-family: 'Times New Roman', Times, serif;
+}
+.btnCnt{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.printIcon{
+  background: "../assets/print.png'";
+    height: 20px;
+    width: 20px;
+    display: block;
+}

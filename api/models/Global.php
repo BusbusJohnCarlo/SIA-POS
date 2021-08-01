@@ -10,7 +10,7 @@
 
 		public function select_pre($table, $filter_data) {
 
-			$sql = "SELECT * FROM tbl_order";
+			$sql = "SELECT * FROM pos_order_tb";
 		
 			if($filter_data != null){
 				$sql .=" WHERE id = $filter_data ";
@@ -151,7 +151,7 @@
 				//DELETE
 				public function clearOrder($dt){
 		
-					$sql = "DELETE FROM tbl_order";
+					$sql = "DELETE FROM pos_order_tb";
 		
 				
 					$data = array(); $code = 0; $errmsg= ""; $remarks = "";

@@ -15,7 +15,7 @@
 
 
 
-	define("DBASE", "sia-pos");
+	define("DBASE", "cocolime_db");
 	define("USER", "root");
 	define("PW", "");
 	define("SERVER", "localhost");

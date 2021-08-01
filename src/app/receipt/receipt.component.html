@@ -43,135 +43,75 @@
                     </mat-toolbar>
                 </div>
                 
-                  <!--  <div class="btns">
-                        \<button class="add-button"  onclick="window.print();" mat-flat-button><mat-icon class="aligned-with-icon">add_circle_outline</mat-icon> Print Orders</button> 
-                        <button class="view-archives"   matBadgeColor="warn"   mat-flat-button><mat-icon class="aligned-with-icon">folder_open</mat-icon><span class="aligned-with-icon"> Archives </span></button>
-                        
-                      </div>     -->
-               <!--  <mat-form-field class="search"autocomplete="off">
-                  
-                    <mat-label search><mat-icon class="aligned-with-icon1"  style="font-size: 25px;">search</mat-icon><span class="iLabel">Search</span></mat-label>
-                    <input  autocomplete="off" matInput class="searchField"  >
-                </mat-form-field> -->
-
-                <!-- <div class="card-main" >  
-
-
-                      
-
-      
-                  
-    
-
-            <div class="receipt-screen">
-            
-                <div  class="pos-receipt-container">
-
-                    <div  id="print-section" class="receipt-content">
-                        <img src="../assets/logo.png" class="inventory-logo"> -->
-                        <!-- <div class="companyInfo">
-
-                           
-
-                        </div>
-
-                        <div class="orderlines">
-                    
-                        </div> -->
-                    <!-- </div> -->
-                    <!-- <div class="func-container">
-                    <button  printTitle="MyTitle"  printSectionId="print-section"  ngxPrint>print</button>
-                    </div> -->
-                <!-- </div>
                 
-            </div> -->
-
-            <div class="row no-gutters">
-<!-- 
-              <div class="col-24 text">
-
-
-              </div> -->
-
-                  <div class="col-5 no-gutters">
-
-                    
-
-                    <div class="leftside d-flex justify-content-center align-items-center">
-
-                      <mat-card class="invoice">
+                 
+                <div class="receipt-content">
+                      <mat-card class="invoice" id="print-section" >
                         <img src="../assets/logo.png" class="inventory-logo">
+                        <div class="cocolimeInfo">
+                          Along Rizal Hiway, Across Times Square Cinema<br>
+                           Subic Bay, Rizal Hwy, Olongapo,<br>
+                            2200 Zambales<br>
+                            (047) 252 2412
+                        </div>
+                        <mat-list  *ngFor="let pre of preOrder">
+                          <!--  <mat-list-item > <strong class="total1">Order Name</strong> </mat-list-item>
+                           <hr class="hr">
+                           <mat-list-item > <strong class="total1">OrderQuantity</strong> <span class="inv1">0.0</span></mat-list-item>
+                           <hr class="hr"> -->
+                           <mat-list-item class="lineH t"  > 
+                             <p class="total"> {{pre.quantity}} {{pre.product_name}} </p>
+                             <span class="inv1"> {{pre.price | currency : 'PHP': 'symbol-narrow'}}</span>
+                            </mat-list-item>
+                          
+            
+                         </mat-list>
+                         <hr>
+                        <mat-list class="footer">
+                          
+                         <!--  <mat-list-item > <strong class="total1">Order Name</strong> </mat-list-item>
+                          <hr class="hr">
+                          <mat-list-item > <strong class="total1">OrderQuantity</strong> <span class="inv1">0.0</span></mat-list-item>
+                          <hr class="hr"> -->
+                          <mat-list-item class="lineH" > <strong class="total">SubTotal</strong> <span class="inv1">{{subtotal - subtotal * 0.12 | currency : 'PHP': 'symbol-narrow' : ''}}</span></mat-list-item>
+                        
+                          <mat-list-item class="lineH"> <strong class="total">VAT</strong> <span class="inv1">{{subtotal * 0.12 | currency : 'PHP': 'symbol-narrow' : ''}}</span></mat-list-item>
+              
+                          <mat-list-item class="lineH"> <strong class="total">Cash</strong> <span class="inv1">0.0</span></mat-list-item>
 
-                        <mat-list class="mat">
-                          <mat-list-item > <strong class="total">Order Name</strong> </mat-list-item>
-                          <mat-list-item > <strong class="total">OrderQuantity</strong> <span class="inv">0.0</span></mat-list-item>
-                          <hr class="hr">
-                          <mat-list-item > <strong class="total">SubTotal</strong> <span class="inv">0.0</span></mat-list-item>
-                          <mat-list-item > <strong class="total">Tax15.00%</strong> <span class="inv">0.0</span></mat-list-item>
-                          <hr class="hr">
-                          <mat-list-item > <strong class="total1">TOTAL</strong> <span class="inv1">0.0</span></mat-list-item>
-                          <hr class="hr">
-                          <mat-list-item > <strong class="total">Cash</strong> <span class="inv">0.0</span></mat-list-item>
-                          <hr class="hr">
-                          <mat-list-item > <strong class="total1">Change</strong> <span class="inv1">0.0</span></mat-list-item>
+                          <mat-list-item class="lineH" > <strong class="total1">TOTAL</strong> <strong class="inv"> {{subtotal | currency : 'PHP': 'symbol-narrow' : ''}}</strong></mat-list-item>
+          
+                          <div class="info">
+                            <span class="inv1">Order #</span>
+                            <br>
+                            <span class="inv1">Date and Time: </span>
+                          </div>
+                          
                         </mat-list>
 
-                        <div class="info">
-                          <span class="inv2">Order #</span>
-                          <br>
-                          <span class="inv2">Date and Time</span>
-                        </div>
+                        
                         
                         
                         
                       </mat-card>
-
+                      <div class="btnCnt">
+                        <button  [useExistingCss]="true" printTitle="MyTitle" style="width: 50vh; border-radius: 5px; margin-top: 1px;"  printSectionId="print-section"  ngxPrint><img src="../assets/print.png"  style=" display: flex; margin: auto;"></button>
+                      </div>
+                </div>
                       
 
 
 
-                    </div>
 
                     
 
 
           
-                  </div>
+                  
           
-                  <div class="col-7 no-gutters">
-          
-                    <div class="rightside">
-
-                      <p>How would you like to recieve your receipt?</p>
-
-
-                      <div>
-                        <button type="button" class="col-8 buttonprint">
-                          <span class="button__icon">
-                            <mat-icon class="dashboard1">dashboard</mat-icon>
-                          </span>
-                          <span class="button__text">Print Receipt</span>
-                          
-                        </button>
-                    </div>
-                    <br>
-                    <br>
-                      <!-- <button  printTitle="MyTitle"  printSectionId="print-section"  ngxPrint>Print Receipt</button> -->
-
-
-                      <div class="emaildiv">
-                        <input class="emailprint" type="text" placeholder="Email">
-                        <button type="button" class="enter">SEND  </button>
-
-
-                      </div>
-                    </div>
-          
-                  </div>
+                  
           
     
-    
-        </div>
 
             
 

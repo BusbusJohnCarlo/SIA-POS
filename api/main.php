@@ -22,26 +22,26 @@
 			switch($req[0]) {
 				case 'pre':
 					if(count($req)>1){
-						echo json_encode($gm->select_pre('tbl_order'.$req[0], $req[1]),JSON_PRETTY_PRINT);
+						echo json_encode($gm->select_pre('pos_order_tb'.$req[0], $req[1]),JSON_PRETTY_PRINT);
 					} else {
-						echo json_encode($gm->select_pre('tbl_order', null),JSON_PRETTY_PRINT);
+						echo json_encode($gm->select_pre('pos_order_tb', null),JSON_PRETTY_PRINT);
 					}
 				break;
 				case 'addOrder':
                     $d = json_decode(base64_decode(file_get_contents("php://input")));
-                    echo json_encode($gm->insert("tbl_preorder",$d), JSON_PRETTY_PRINT);
+                    echo json_encode($gm->insert("pos_preorder_tb",$d), JSON_PRETTY_PRINT);
                 break;
 				case 'addPreOrder':
                     $d = json_decode(base64_decode(file_get_contents("php://input")));
-                    echo json_encode($gm->insert("tbl_order",$d), JSON_PRETTY_PRINT);
+                    echo json_encode($gm->insert("pos_order_tb",$d), JSON_PRETTY_PRINT);
                 break;
 				case 'getProd':
                     $d = json_decode(base64_decode(file_get_contents("php://input")));
-                    echo json_encode($gm->insert("tbl_product",$d), JSON_PRETTY_PRINT);
+                    echo json_encode($gm->insert("menu_tb",$d), JSON_PRETTY_PRINT);
                 break;
 				case 'updatePreOrder':
                     $d = json_decode(base64_decode(file_get_contents("php://input")));
-                    echo json_encode($gm->edit("tbl_order",$d), JSON_PRETTY_PRINT);
+                    echo json_encode($gm->edit("pos_order_tb",$d), JSON_PRETTY_PRINT);
                 break;
 				case 'prod':                   
 					if(count($req)>1) {                        
