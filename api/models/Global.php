@@ -43,7 +43,7 @@
 					return array("code"=>$code, "data"=>$data);
 				} else {
 					$errmsg = $err;
-					$code = 404;
+			
 				}
 			} catch (\PDOException $e) {
 				$errmsg = $e->getMessage();
@@ -51,39 +51,35 @@
 			}
 			return array("code"=>$code, "errmsg"=>$errmsg);
 		}
-		
 
 
 		// INSERT 
 
 		public function insert($table, $data){
 			$i = 0; $fields=[]; $values=[];
-			foreach ($data as $key => $value){
+			foreach ($data as $key => $value) {
 				array_push($fields, $key);
 				array_push($values, $value);
 			}
-
-			try{
+			try {
 				$ctr = 0;
-				$sqlstr = "INSERT INTO $table (";
-				foreach ($fields as $value)	{
+				$sqlstr="INSERT INTO $table (";
+				foreach ($fields as $value) {
 					$sqlstr.=$value; $ctr++;
-					if($ctr<count($fields))	{
+					if($ctr<count($fields)) {
 						$sqlstr.=", ";
-					}
-				}
+					} 	
+				} 
 
 				$sqlstr.=") VALUES (".str_repeat("?, ", count($values)-1)."?)";
 
 				$sql = $this->pdo->prepare($sqlstr);
 				$sql->execute($values);
 				return array("code"=>200, "remarks"=>"success");
-
-			} catch (\PDOException $e){
+			} catch (\PDOException $e) {
 				$errmsg = $e->getMessage();
 				$code = 403;
 			}
-
 			return array("code"=>$code, "errmsg"=>$errmsg);
 		}
 

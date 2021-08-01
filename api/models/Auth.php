@@ -79,8 +79,23 @@
                 'pword'=>$this->encrypt_password($dt->user_password)
             );
 
-            $sql = "INSERT INTO tbl_user( user_names, user_address, user_contact, user_email, user_password) 
-                           VALUES ('$dt->user_names', '$dt->user_address', '$dt->user_contact','$dt->user_email', '$encryptedPassword')";
+            $sql = "INSERT INTO 
+					tbl_user
+					(
+						user_names, 
+						user_address, 
+						user_contact, 
+						user_email, 
+						user_password
+					) 
+                    VALUES 
+					(
+						'$dt->user_names', 
+						'$dt->user_address', 
+						'$dt->user_contact',
+						'$dt->user_email', 
+						'$encryptedPassword'
+					)";
                      
 
                            $data = array(); $code = 0; $errmsg= ""; $remarks = "";
@@ -114,7 +129,7 @@
 			if($res['code'] == 200) {
 				if($this->pword_check($user_password, $res['data'][0]['user_password'])) {
 					
-				
+					
 					$user_names =$res['data'][0]['user_names'];
 					$user_id = $res['data'][0]['user_id'];
 					$user_address = $res['data'][0]['user_address'];
@@ -139,6 +154,10 @@
 			}
 			return $this->gm->sendPayload($payload, $remarks, $message, $code);
 		}
+
+
+
+		
 
 
     }

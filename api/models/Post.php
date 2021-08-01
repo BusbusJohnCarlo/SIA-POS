@@ -12,19 +12,100 @@ class Post{
 
 // ADD PRODUCT
 
+
+public function checkPreOrderItem($product_name, $existingItem)
+{
+
+			if($product_name===$existingItem){
+				return true;
+			}
+			return false;
+}
+
+
+public function addPreOrderNew($dt)
+{
+  
+    $payload = $dt;
+    $product_name = $dt->product_name;
+  
+  
+
+
+
+    $sql = "SELECT * FROM pos_order_tb WHERE product_name='$product_name' LIMIT 1";
+    $res = $this->gm->generalQuery($sql, "Failed");
+    if($res['code'] == 200) {
+        if($this->checkPreOrderItem($product_name, $res['data'][0]['product_name'])) {
+   
+            $newQuantity = $dt->quantity + $res['data'][0]['quantity'];
+            $newPrice = $dt->price + $res['data'][0]['price'];
+
+            $sql1=" UPDATE `pos_order_tb` 
+            SET 
+            `quantity` = '$newQuantity',
+            `price` = '$newPrice'
+            WHERE 
+            `product_name` = '$product_name';
+            
+            "; 
+           
+            
+
+            $res1 = $this->gm->generalQuery($sql1, "");
+
+            
+
+        if ($res1['code'] != 200) {
+ 
+            $code = 200;
+            $payload = $res1;
+            $remarks = "success";
+            $message = $res1;
+
+        } 
+
+       
+           
+           
+        } else {
+            $payload = null; 
+            $remarks = "failed"; 
+            $message = $res['errmsg'];
+
+        }
+    }	else {
+
+    $res = $this->addPreOrder($dt);
+
+        $code = 200;
+        $payload = $res;
+        $remarks = "success";
+        $message = "Successfully retrieved data";
+
+    }
+    return $this->gm->sendPayload($payload, $remarks, $message, $code);
+    }
+
+
+
+
+
+
+
 public function addPreOrder($data) {
 
     $code = 401;
     $payload = null;
     $remarks = "failed";
     $message = "Unable to retrieve data";
-    $orderInfo = $data->orderInfo;
 
-    $res = $this->gm->insert('pos_order_tb', $orderInfo);
+
+    $res = $this->gm->insert('pos_order_tb', $data);
 
     if($res['code']==200) {
         $code = 200;
-        $payload = $res['data'];
+        $payload = $res;
         $remarks = "success";
         $message = "Successfully retrieved data";
         

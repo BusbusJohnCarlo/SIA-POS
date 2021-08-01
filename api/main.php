@@ -31,10 +31,10 @@
                     $d = json_decode(base64_decode(file_get_contents("php://input")));
                     echo json_encode($gm->insert("pos_preorder_tb",$d), JSON_PRETTY_PRINT);
                 break;
-				case 'addPreOrder':
-                    $d = json_decode(base64_decode(file_get_contents("php://input")));
-                    echo json_encode($gm->insert("pos_order_tb",$d), JSON_PRETTY_PRINT);
-                break;
+				// case 'addPreOrder':
+                //     $d = json_decode(base64_decode(file_get_contents("php://input")));
+                //     echo json_encode($gm->insert("pos_order_tb",$d), JSON_PRETTY_PRINT);
+                // break;
 				case 'getProd':
                     $d = json_decode(base64_decode(file_get_contents("php://input")));
                     echo json_encode($gm->insert("menu_tb",$d), JSON_PRETTY_PRINT);
@@ -74,6 +74,12 @@
 								$d = json_decode(base64_decode(file_get_contents("php://input")));
 								echo json_encode($gm->clearOrder($d));
 							break;
+
+
+							case 'addPreOrderNew':
+								$d = json_decode(base64_decode(file_get_contents("php://input")));
+								echo json_encode($post->addPreOrderNew($d), JSON_PRETTY_PRINT);
+							break;			
 			}
 		break;
 
