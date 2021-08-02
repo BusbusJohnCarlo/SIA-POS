@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
 /* import { NgxPrintModule } from 'ngx-print'; */
@@ -27,8 +27,28 @@ export class OrderComponent implements OnInit {
   edit: boolean = false; 
   view: boolean = false;
  
+  @ViewChild('DetailsDialog', { static: true })
+  DetailsDialog!: TemplateRef<any>;
   
-  
+  detailModal = (i:any) => {
+    
+    this.dialog.open(this.DetailsDialog,
+      {
+        width: '100%',
+        height: '80%'
+      });
+    this.recieptDetails.order_code = i;
+
+    this.ds.sendApiRequest("pullDetails", this.recieptDetails).subscribe((data: any) => {
+     this.details = data.payload;
+     
+ 
+   
+   
+ 
+   })
+   
+  }
 
   showFiller = false;
 
@@ -140,6 +160,10 @@ async delOrder(e: any)
       } 
     }) 
   }
+
+  recieptDetails: any = {};
+  details: any;
+ 
 
 }
 

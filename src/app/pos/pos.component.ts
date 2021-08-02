@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterContentInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import { NgxPrintModule } from 'ngx-print';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2'
   styleUrls: ['./pos.component.css']
 })
 
-export class POSComponent implements OnInit {
+export class POSComponent implements OnInit, AfterContentInit {
 
 
   @Output() reciptCodeContainer = new EventEmitter<string>();
@@ -25,9 +25,11 @@ export class POSComponent implements OnInit {
   view: boolean = false;
 
   reciptCode: any;
-
-
+  code: any;
+  orderCode: any = {};
   showFiller = false;
+  orderList: any = {};
+  orderSubmitted: any = {};
 
   constructor(
     public dialog: MatDialog,
@@ -59,9 +61,38 @@ export class POSComponent implements OnInit {
     else{
 
       this.cashEntered = this.cashInput;
-      
+      this.orderCode.order_code = this.reciptCode;  
+      this.orderCode.cashChange = this.cashEntered - this.subtotal;
+ 
 
-      this.route.navigateByUrl('/receipt');
+      this.ds.sendApiRequest("pushCode", this.orderCode).subscribe((data: any) => {
+    
+        if(data.status.remarks == "success"){
+
+          this.orderList.list_order_code = this.reciptCode;
+          this.orderList.list_order_total = this.subtotal;
+          this.orderList.cashChange = this.cashEntered - this.subtotal;
+          
+
+          this.ds.sendApiRequest("addOrderlist", this.orderList).subscribe((data1: any) => {
+
+            if(data1.status.remarks == "success")
+            {
+              this.orderSubmitted.isSubmitted = 1;
+              this.orderSubmitted.order_code = this.reciptCode;
+
+              this.ds.sendApiRequest("submittedOrder", this.orderSubmitted).subscribe((data2: any) => {
+              console.log(data2);
+              if(data2.status.remarks == "success")
+              {
+                this.route.navigate(['/receipt', this.reciptCode, this.cashEntered]);
+              }
+              });
+            }
+        }); 
+           }
+     }); 
+
   
     }
   }
@@ -82,17 +113,21 @@ export class POSComponent implements OnInit {
     this.pullPreOrder();
     this.pullOrder();
     this.getSubTotal();
-    this.generateCode();
-
 
 
   }
+
+
+  ngAfterContentInit(){
+    this.generateCode();
+  }
+
 
   generateCode(){
     var seq = (Math.floor(100000000 + Math.random() * 900000000)).toString().substring(1);
     this.reciptCode = seq;
 
-    console.log("hello");
+
   }
 
   deleteBtn() {
@@ -151,7 +186,7 @@ export class POSComponent implements OnInit {
   /*  @Input() title:string; */
   addOrder = (products: any) => {
 
-      this.reciptCodeContainer.emit(this.reciptCode);
+    this.reciptCodeContainer.emit(this.reciptCode);
     this.orderInfo.product_name = products.name;
     this.orderInfo.quantity = products.subtitle * this.inputText;
     this.orderInfo.price = products.price * this.inputText;
@@ -167,6 +202,9 @@ export class POSComponent implements OnInit {
   //addPreorder
   orderInfo:any={};
   addPreOrder = (product:any) =>{
+
+    this.code = this.reciptCode;
+
     if (this.inputText == 0){
      
       Swal.fire({  
@@ -178,24 +216,31 @@ export class POSComponent implements OnInit {
     
     } 
 
-    else {  
-    
-      this.orderInfo.product_name = product.product_name ;
-      this.orderInfo.quantity = product.available * this.inputText;
-      this.orderInfo.price = product.product_price * this.inputText;
-      this.orderInfo.order_code = this.reciptCode;
-      console.log(this.orderInfo.order_code);
-      this.q = this.inputText;
-      this.ds.sendApiRequest("addPreOrderNew", this.orderInfo).subscribe((data: any) => {
-  
-     if(data.status.remarks == "success"){
-          console.log(true)
-          this.pullPreOrder();
-          this.inputText = 0;
-  this.getSubTotal();
+    else {
+      
+     
+        this.orderInfo.product_name = product.product_name ;
+        this.orderInfo.quantity = product.available * this.inputText;
+        this.orderInfo.price = product.product_price * this.inputText;
+        this.orderInfo.order_code = this.reciptCode;
 
-        }
-  }); 
+        this.q = this.inputText;
+
+        console.log(this.orderInfo);
+        this.ds.sendApiRequest("addPreOrderNew", this.orderInfo).subscribe((data: any) => {
+    
+       if(data.status.remarks == "success"){
+            console.log(true)
+            this.pullPreOrder();
+            this.inputText = 0;
+    this.getSubTotal();
+  
+          }
+    }); 
+        
+      
+    
+     
 
   
 
@@ -266,6 +311,7 @@ export class POSComponent implements OnInit {
     this.ds.sendApiRequest("clearOrder", this.orderInfo).subscribe((res: any) => {
 
       this.pullPreOrder();
+
 
     });
   }

@@ -61,10 +61,9 @@
               <thead>
                 <tr class="thead" >
   
-                  <th id="th">OrderNo.</th>
-                  <th id="th">Product</th>
-                  <th id="th">Quantity</th>
-                  <th id="th">Price</th>
+                  <th id="th">Receipt Code</th>
+                  <th id="th">Total</th>
+                  <th id="th">Date Issued</th>
                   <th id="th">Actions</th>
   
                 </tr>
@@ -74,22 +73,21 @@
               <tbody>
                 <tr *ngFor="let order of order">
   
-                  <td class="td" >
-                    {{ order.prodID }}
-                  </td>
+              
                   <td class="td">
-                    {{order.product_name}}
+                    {{order.list_order_code}}
                   </td>
                   <td class="td"> 
-                    {{order.quantity}}
+                    {{order.list_order_total}}
                   </td>
                   <td class="td"> 
-                    {{order.price}}
+                    {{order.list_order_date   | date: 'MMM dd, yyyy'}}
                   </td>
                   <td >
                       <div class="actBtn">
                    <!--  <button mat-raised-button class="edit-button" color="success" ><mat-icon class="editIcon">edit</mat-icon>Edit</button>  -->
-                    <button mat-raised-button class="archive-button"   (click)="delOrder(order.prodID);"><mat-icon class="archiveIcon">archive</mat-icon>Archive</button>
+                   <button mat-raised-button class="archive-button"   (click)="detailModal(order.list_order_code);"><mat-icon class="archiveIcon">remove_red_eye</mat-icon>Details</button>
+                    <button mat-raised-button class="archive-button"   (click)="delOrder(order.list_id);"><mat-icon class="archiveIcon">archive</mat-icon>Archive</button>
                 </div>
                   </td>
   
@@ -120,6 +118,56 @@
 <!--invoice table -->
 
   <!--order table -->
+
+
+  
+  <!-- Details Modal -->
+  <ng-template class="detailsDialog" #DetailsDialog>
+<div class="mat-elevation-z8 tableSizeDetails" >
+      
+        <div class="print-container">
+            <table class="head">
+              <thead>
+                <tr class="thead" >
+  
+                  <th id="th">Receipt Code</th>
+                  <th id="th">Product Name</th>
+                  <th id="th">Quantity</th>
+                  <th id="th">Price</th>
+  
+                </tr>
+              </thead>
+  
+  
+              <tbody>
+                <tr *ngFor="let details of details">
+  
+              
+                  <td class="td">
+                    {{details.order_code}}
+                  </td>
+                  <td class="td"> 
+                    {{details.product_name}}
+                  </td>
+                  <td class="td"> 
+                    {{details.quantity}}
+                  </td>
+
+                  <td class="td"> 
+                    {{details.price | currency : 'PHP': 'symbol-narrow' : ''}}
+                  </td>
+                 
+  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+      <div class="div-print-item">
+        <!-- <button onclick="window.print();"><i class="fas fa-print"></i>&nbsp; Print</button> -->
+      </div>
+    </div>
+  </ng-template>
 </body>
 
 

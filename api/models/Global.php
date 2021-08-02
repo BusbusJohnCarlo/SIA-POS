@@ -6,14 +6,111 @@
 			$this->pdo = $pdo;
 		}
 
+
+		public function generalQuery1($sql, $err) {
+			$data = array();
+			$errmsg = "";
+			$code = 0;
+			try {
+				if($result = $this->pdo->query($sql)->fetchAll()){
+					foreach ($result as $record)
+						array_push($data, $record);
+					$result = null;
+					$code = 200;
+					return array("code"=>$code, "data"=>$data);
+				} else {
+					$errmsg = $err;
+			
+				}
+			} catch (\PDOException $e) {
+				$errmsg = $e->getMessage();
+				$code = 403;
+			}
+			return array("code"=>$code, "errmsg"=>$errmsg);
+		}
+
+
+
+		public function update($table, $data, $conditionStringPassed){
+			$fields=[]; $values=[];
+			$setStr = "";
+			foreach ($data as $key => $value) {
+				# code...
+				array_push($fields, $key);
+				array_push($values, $value);
+				
+			}
+			try{
+				$ctr = 0;
+				$sqlstr = "UPDATE $table SET ";
+
+					foreach ($data as $key => $value) {
+						$sqlstr .="$key=?"; $ctr++;
+						if($ctr<count($fields)){
+							$sqlstr.=", ";
+						}
+					}
+
+					$sqlstr .= " WHERE ".$conditionStringPassed;
+					$sql = $this->pdo->prepare($sqlstr);
+					$sql->execute($values);
+				return array("code"=>200, "remarks"=>"success");	
+			}
+			catch(\PDOException $e){
+				$errmsg = $e->getMessage();
+				$code = 403;
+			}
+			return array("code"=>$code, "errmsg"=>$errmsg);
+
+		}
+
+
+
+		public function pushOrderCode($table, $data){
+			$fields=[]; $values=[];
+			$setStr = "";
+			foreach ($data as $key => $value) {
+				# code...
+				array_push($fields, $key);
+				array_push($values, $value);
+				
+			}
+			try{
+				$ctr = 0;
+				$sqlstr = "UPDATE $table SET ";
+
+					foreach ($data as $key => $value) {
+						$sqlstr .="$key=?"; $ctr++;
+						if($ctr<count($fields)){
+							$sqlstr.=", ";
+						}
+					}
+
+				
+					$sql = $this->pdo->prepare($sqlstr);
+					$sql->execute($values);
+				return array("code"=>200, "remarks"=>"success");	
+			}
+			catch(\PDOException $e){
+				$errmsg = $e->getMessage();
+				$code = 403;
+			}
+			return array("code"=>$code, "errmsg"=>$errmsg);
+
+		}
+
+
+
+		
+
 		
 
 		public function select_pre($table, $filter_data) {
-
+			$isSubmitted = 0;
 			$sql = "SELECT * FROM pos_order_tb";
 		
 			if($filter_data != null){
-				$sql .=" WHERE id = $filter_data ";
+				$sql .=" WHERE isSubmitted = '$isSubmitted'";
 			}
 		
 			$data = array(); $code = 0; $msg= ""; $remarks = "";

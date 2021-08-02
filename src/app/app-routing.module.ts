@@ -21,7 +21,7 @@ const routes: Routes = [
     component: OrderComponent
   },
   {
-    path: 'receipt', 
+    path: 'receipt/:code/:cash', 
     component: ReceiptComponent
   }
   

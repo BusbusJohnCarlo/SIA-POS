@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxPrintModule } from 'ngx-print';
 import { DataService } from '../services/data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-receipt',
@@ -9,17 +10,23 @@ import { DataService } from '../services/data.service';
 })
 export class ReceiptComponent implements OnInit {
 
-
+  receiptID: any;
+  cash: any;
+  receiptInfo: any = {};
   constructor( 
     public ngx: NgxPrintModule,
-    private ds: DataService
+    private ds: DataService,
+    public aRoute: ActivatedRoute
     ) {
 
      }
-  preOrder: any = [];
+  preOrder: any = {};
 
   pullPreOrder() {
-       this.ds.sendApiRequest("pre", null).subscribe((data: any) => {
+
+     this.receiptInfo.order_code = this.receiptID;
+
+       this.ds.sendApiRequest("preOrder", this.receiptInfo).subscribe((data: any) => {
          this.preOrder = data.payload;
          console.log(this.preOrder);
          this.getSubTotal();
@@ -42,6 +49,14 @@ export class ReceiptComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.aRoute.params.subscribe(params => {
+      this.receiptID = params['code'];
+      this.cash = params['cash']
+    });
+
+
+
+
     this.getSubTotal();
     this.pullPreOrder();
   }

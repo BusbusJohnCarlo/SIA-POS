@@ -23,17 +23,72 @@ public function checkPreOrderItem($product_name, $existingItem)
 }
 
 
+public function addOrderlist($dt)
+{
+
+    $code = 401;
+    $payload = null;
+    $remarks = "failed";
+    $message = "Unable to retrieve data";
+    // $isSubmitted = $dt->isSubmitted;
+    // $order_code = $dt->order_code;
+
+    $res = $this->gm->insert('pos_preorder_tb', $dt);
+
+    if($res['code']==200) {
+        // $res = $this->gm->update('pos_order_tb', $isSubmitted, "order_code = '$order_code'");
+        // if ($res['code'] == 200) {
+        $code = 200;
+        $payload = $res;
+        $remarks = "success";
+        $message = "Successfully retrieved data";
+        // }
+        
+    
+    return $this->gm->sendPayload($payload, $remarks, $message, $code);
+
+}
+}
+
+
+public function submittedOrder($dt)
+{
+    
+    $code = 401;
+    $payload = null;
+    $remarks = "failed";
+    $message = "Unable to retrieve data";
+    $isSubmitted = $dt->isSubmitted;
+    $order_code = $dt->order_code;
+  
+
+    $sql = "UPDATE `pos_order_tb` SET `isSubmitted` = '1' WHERE `pos_order_tb`.`order_code` = '$order_code'";
+    $res = $this->gm->generalQuery1($sql, "");
+
+     if($res['code']!=200) {
+     
+        $code = 200;
+        $payload = $res;
+        $remarks = "success";
+        $message = "Successfully retrieved data";
+
+}
+
+return $this->gm->sendPayload($payload, $remarks, $message, $code);
+
+}
+
 public function addPreOrderNew($dt)
 {
   
     $payload = $dt;
     $product_name = $dt->product_name;
+    $order_code = $dt->order_code;
   
-  
 
 
 
-    $sql = "SELECT * FROM pos_order_tb WHERE product_name='$product_name' LIMIT 1";
+    $sql = "SELECT * FROM pos_order_tb WHERE product_name='$product_name' AND order_code = '$order_code' LIMIT 1";
     $res = $this->gm->generalQuery($sql, "Failed");
     if($res['code'] == 200) {
         if($this->checkPreOrderItem($product_name, $res['data'][0]['product_name'])) {
@@ -46,7 +101,8 @@ public function addPreOrderNew($dt)
             `quantity` = '$newQuantity',
             `price` = '$newPrice'
             WHERE 
-            `product_name` = '$product_name';
+            `product_name` = '$product_name'
+
             
             "; 
            
@@ -87,7 +143,31 @@ public function addPreOrderNew($dt)
     return $this->gm->sendPayload($payload, $remarks, $message, $code);
     }
 
+public function pushCode($d)
+{
+    
+    $code = 401;
+    $payload = null;
+    $remarks = "failed";
+    $message = "Unable to retrieve data";
+    $order_code = $d->order_code;
+    $sql=" UPDATE `pos_order_tb` 
+            SET 
+            `order_code` = '$order_code' WHERE isSubmitted = '0'"; 
+    
+    $res = $this->gm->generalQuery($sql, "");
 
+    if($res['code']!=200) {
+        $code = 200;
+        $payload = $res;
+        $remarks = "success";
+        $message = "Successfully retrieved data";
+        
+    }
+    return $this->gm->sendPayload($payload, $remarks, $message, $code);
+  
+
+}
 
 
 
