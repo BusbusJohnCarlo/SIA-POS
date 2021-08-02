@@ -243,6 +243,7 @@ table {
   color: #282828;
   text-align: center;
   padding: 2%;
+  
 }
 
 .th {
@@ -445,3 +446,13 @@ input.example-right-align {
 .head {
   height: 100%;
 }
+.thead2{
+  border-bottom: 2px solid #bab583;
+  padding: 2%;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #282828;
+  text-align: center;
+  width: 170px;
+}
+
