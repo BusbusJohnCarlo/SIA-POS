@@ -1,16 +1,19 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+
 import { DataService } from '../../services/data.service';
 /* import { NgxPrintModule } from 'ngx-print'; */
 import Swal from 'sweetalert2'
 
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface orderCodes {
+  list_id: any;
+  list_order_code: any;
+  list_order_total: any;
+  list_order_date: any;
+  
 }
 
 
@@ -19,7 +22,39 @@ export interface PeriodicElement {
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, AfterViewInit {
+
+
+  
+  @ViewChild(MatPaginator) paginator !: MatPaginator;
+
+
+  codeInfoTable: orderCodes[]  = [];
+  codeTableDataSource = new MatTableDataSource(this.codeInfoTable);
+
+  displayedColumns: any[] = [
+
+
+    "Column1",
+    "Column2",
+    "Column3",
+    "Column4",
+    "Column5"
+   
+  
+  ];
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.codeTableDataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+
+  ngAfterViewInit()
+  {
+    this.codeTableDataSource.paginator = this.paginator;
+  }
+
 
   panelOpenState = false;
   Order:boolean = true;
@@ -129,7 +164,11 @@ export class OrderComponent implements OnInit {
   order:any;
   pullOrder() 
   { 
-    this.ds.sendApiRequest("order", null).subscribe((data: any) => { this.order = data.payload; 
+    this.ds.sendApiRequest("order", null).subscribe((data: any) => 
+    {
+       this.codeInfoTable = data.payload; 
+       this.codeTableDataSource.data = this.codeInfoTable;
+       console.log(this.codeTableDataSource);
     })
     
   }

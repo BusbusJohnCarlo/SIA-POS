@@ -183,11 +183,13 @@ table {
   margin-top: 30px;
   width: 100%;
   background-color: #fbfbfb;
+  height: 52rem;
 }
 
 .tableSize {
   margin-left: 3%;
   margin-right: 3%;
+  text-align: center;
 }
 
 .tableSizeDetails {
@@ -244,6 +246,8 @@ table {
 }
 
 .th {
+  border-bottom: 2px solid #bab583;
+  padding: 2%;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   color: #282828;
@@ -252,35 +256,17 @@ table {
 }
 
 .actBtn {
-  width: 100px;
-  margin-left: 40px;
-}
-
-.edit-button {
-  font-size: 14px;
-  font-family: "Poppins", sans-serif;
-  margin-bottom: 5px;
-  background-color: #3e66db;
-  color: #ffffff;
-  width: 110px;
-}
-
-.edit-button:hover {
-  background-color: #fbfbfb;
-  color: #3e66db;
-}
-
-.editIcon {
-  font-size: 21px;
-  margin-right: -3%;
-  margin-left: -6%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .archive-button {
   display: inline;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
-
+  margin: 1%;
   background-color: #f34542;
   color: #ffffff;
   width: 110px;
@@ -291,6 +277,26 @@ table {
   color: #f34542;
 }
 .archiveIcon {
+  font-size: 21px;
+  margin-left: -10%;
+}
+
+.view-button {
+  display: inline;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  margin: 1%;
+  background-color: #bab583;
+  color: #ffffff;
+  width: 110px;
+}
+
+.view-button:hover {
+  background-color: #fbfbfb;
+  color: #bab583;
+}
+
+.viewIcon {
   font-size: 21px;
   margin-left: -10%;
 }
@@ -434,4 +440,8 @@ input.example-right-align {
   .print-container * {
     visibility: visible;
   }
+}
+
+.head {
+  height: 100%;
 }

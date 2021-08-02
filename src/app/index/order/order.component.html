@@ -41,15 +41,15 @@
                     </mat-toolbar>
                 </div>
                 
-                   <div class="btns">
+                   <!-- <div class="btns"> -->
                         <!-- <button class="add-button"  onclick="window.print();" mat-flat-button><mat-icon class="aligned-with-icon">add_circle_outline</mat-icon> Print Orders</button> -->
-                        <button class="view-archives"   matBadgeColor="warn"   mat-flat-button><mat-icon class="aligned-with-icon">folder_open</mat-icon><span class="aligned-with-icon"> Archives </span></button>
+                        <!-- <button class="view-archives"   matBadgeColor="warn"   mat-flat-button><mat-icon class="aligned-with-icon">folder_open</mat-icon><span class="aligned-with-icon"> Archives </span></button> -->
                         
-                      </div>    
+                      <!-- </div>     -->
                 <mat-form-field class="search"autocomplete="off">
                   
                     <mat-label search><mat-icon class="aligned-with-icon1"  style="font-size: 25px;">search</mat-icon><span class="iLabel">Search</span></mat-label>
-                    <input  autocomplete="off" matInput class="searchField"  >
+                    <input  autocomplete="off" matInput class="searchField"  (keyup)="applyFilter($event)" >
                 </mat-form-field>
 
                 <div class="card-main" >  
@@ -57,43 +57,58 @@
     <div class="mat-elevation-z8 tableSize" >
       
         <div class="print-container">
-            <table class="head">
-              <thead>
-                <tr class="thead" >
-  
-                  <th id="th">Receipt Code</th>
-                  <th id="th">Total</th>
-                  <th id="th">Date Issued</th>
-                  <th id="th">Actions</th>
-  
-                </tr>
-              </thead>
-  
-  
-              <tbody>
-                <tr *ngFor="let order of order">
-  
-              
-                  <td class="td">
-                    {{order.list_order_code}}
-                  </td>
-                  <td class="td"> 
-                    {{order.list_order_total}}
-                  </td>
-                  <td class="td"> 
-                    {{order.list_order_date   | date: 'MMM dd, yyyy'}}
-                  </td>
-                  <td >
-                      <div class="actBtn">
-                   <!--  <button mat-raised-button class="edit-button" color="success" ><mat-icon class="editIcon">edit</mat-icon>Edit</button>  -->
-                   <button mat-raised-button class="archive-button"   (click)="detailModal(order.list_order_code);"><mat-icon class="archiveIcon">remove_red_eye</mat-icon>Details</button>
-                    <button mat-raised-button class="archive-button"   (click)="delOrder(order.list_id);"><mat-icon class="archiveIcon">archive</mat-icon>Archive</button>
-                </div>
-                  </td>
-  
-                </tr>
-              </tbody>
-            </table>
+
+<div class="mat-elevation-z8 head">
+  <table class="" mat-table [dataSource]="codeTableDataSource">
+
+    <!-- ID -->
+    <ng-container matColumnDef="Column1" hidden class="thead">
+      <th class="th" mat-header-cell *matHeaderCellDef> No. </th>
+      <td  class="td" mat-cell *matCellDef="let element"> {{element.list_id}} </td>
+    </ng-container>
+
+    <!-- CODE -->
+    <ng-container matColumnDef="Column2" class="thead">
+      <th class="th" mat-header-cell *matHeaderCellDef> Receipt Code </th>
+      <td class="td" mat-cell *matCellDef="let element"> {{element.list_order_code}} </td>
+    </ng-container>
+
+    <!-- AMOUNT-->
+    <ng-container matColumnDef="Column3" class="thead">
+      <th class="th" mat-header-cell *matHeaderCellDef> Receipt Amount </th>
+      <td class="td" mat-cell *matCellDef="let element"> {{element.list_order_total | currency : 'PHP': 'symbol-narrow' : ''}} </td>
+    </ng-container>
+
+    <!-- DATE -->
+    <ng-container matColumnDef="Column4" class="thead">
+      <th class="th" mat-header-cell *matHeaderCellDef> Date </th>
+      <td class="td" mat-cell *matCellDef="let element"> {{element.list_order_date  | date: 'MMM dd, yyyy'}} </td>
+    </ng-container>
+
+    <!-- ACTION -->
+    <ng-container matColumnDef="Column5" class="thead">
+      <th class="th" mat-header-cell *matHeaderCellDef> Action </th>
+      <td class="td" mat-cell *matCellDef="let element"> 
+        <div class="actBtn">
+          <button mat-raised-button class="view-button"   (click)="detailModal(element.list_order_code);"><mat-icon class="archiveIcon">remove_red_eye</mat-icon>Details</button>
+          <!-- <button mat-raised-button class="archive-button"   (click)="delOrder(order.list_id);"><mat-icon class="archiveIcon">archive</mat-icon>Archive</button> -->
+       </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons 
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+
+
+
           </div>
   
       <div class="div-print-item">
